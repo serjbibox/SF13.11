@@ -10,7 +10,7 @@ type Vertex struct {
 	Key        int
 	Vertices   map[int]*Vertex
 	Cost       uint
-	EdgeWeight uint
+	EdgeWeight int
 }
 
 func NewVertex(key int) *Vertex {
@@ -44,7 +44,7 @@ func (g *Graph) AddVertex(key int) {
 	g.Vertices[key] = v
 }
 
-func (g *Graph) AddEdge(k1, k2 int, ew uint) {
+func (g *Graph) AddEdge(k1, k2 int, ew int) {
 	v1 := g.Vertices[k1]
 	v2 := g.Vertices[k2]
 	if v1 == nil {
