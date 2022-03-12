@@ -14,7 +14,34 @@ func init() {
 }
 
 func main() {
-
+	g := graf.NewDirectedGraph()
+	for i := 1; i < 11; i++ {
+		g.AddVertex(i)
+	}
+	g.AddEdge(1, 2, 8)
+	g.AddEdge(1, 5, 15)
+	g.AddEdge(1, 6, 12)
+	g.AddEdge(2, 3, 11)
+	g.AddEdge(2, 4, 63)
+	g.AddEdge(3, 5, 24)
+	g.AddEdge(3, 4, 38)
+	g.AddEdge(4, 9, 9)
+	g.AddEdge(4, 5, 12)
+	g.AddEdge(5, 8, 14)
+	g.AddEdge(6, 5, 15)
+	g.AddEdge(6, 7, 15)
+	g.AddEdge(7, 9, 5)
+	g.AddEdge(8, 7, 8)
+	g.AddEdge(8, 9, 21)
+	g.AddEdge(8, 4, 16)
+	g.AddEdge(9, 1, 56)
+	g.AddEdge(10, 5, 100)
+	start := 1
+	dest := 9
+	fmt.Println(graf.GetRoute(g.Vertices[start], g.Vertices[dest], g))
+	fmt.Println("длина пути: ", g.Vertices[dest].Cost)
+	//fmt.Println(graf.GetRoute(g.Vertices[1], g.Vertices[9]))
+	//graf.GetCostsFromKey(g.Vertices[1])
 	/*do := 0
 	fmt.Print("Выберите:\n1 - двоичное дерево;\n2 - неориентированный граф, поиск в ширину;\n")
 	fmt.Scanln(&do)
@@ -29,6 +56,27 @@ func main() {
 
 func printBFS() {
 	g := graf.NewUndirectedGraph()
+	for i := 1; i < 10; i++ {
+		g.AddVertex(i)
+	}
+	g.AddEdge(1, 2, 8)
+	g.AddEdge(1, 5, 15)
+	g.AddEdge(1, 6, 12)
+	g.AddEdge(2, 3, 11)
+	g.AddEdge(2, 4, 63)
+	g.AddEdge(3, 5, 24)
+	g.AddEdge(3, 4, 38)
+	g.AddEdge(4, 9, 9)
+	g.AddEdge(4, 5, 12)
+	g.AddEdge(5, 8, 14)
+	g.AddEdge(6, 5, 15)
+	g.AddEdge(6, 7, 15)
+	g.AddEdge(7, 9, 5)
+	g.AddEdge(8, 7, 8)
+	g.AddEdge(8, 9, 21)
+	g.AddEdge(8, 4, 16)
+	//g.AddEdge(9, 1, 56)
+	/*g := graf.NewUndirectedGraph()
 	for i := 0; i < 10; i++ {
 		g.AddVertex(i)
 	}
@@ -40,12 +88,13 @@ func printBFS() {
 	g.AddEdge(8, 5, 1)
 	g.AddEdge(5, 3, 1)
 	g.AddEdge(3, 1, 1)
+	*/
 	//fmt.Println(g)
 	route := []int{}
 	rf := func(i int) {
 		route = append(route, i)
 	}
-	startVertex := 8
+	startVertex := 1
 	if g.Vertices[startVertex] == nil {
 		fmt.Printf("Нет такого стартового ключа: %d", startVertex)
 		return

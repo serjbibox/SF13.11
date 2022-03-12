@@ -7,17 +7,21 @@ import (
 )
 
 type Vertex struct {
-	Key        int
-	Vertices   map[int]*Vertex
-	Cost       uint
-	EdgeWeight int
+	Key       int
+	Vertices  map[int]*Vertex
+	Edges     map[int]int
+	Cost      int
+	Visited   bool
+	CostRoute []int
 }
 
 func NewVertex(key int) *Vertex {
 	return &Vertex{
-		Key:      key,
-		Vertices: map[int]*Vertex{},
-		Cost:     math.MaxUint,
+		Key:       key,
+		Vertices:  map[int]*Vertex{},
+		Cost:      math.MaxInt,
+		Edges:     map[int]int{},
+		CostRoute: []int{},
 	}
 }
 
@@ -64,7 +68,7 @@ func (g *Graph) AddEdge(k1, k2 int, ew int) {
 	}
 	g.Vertices[v1.Key] = v1
 	g.Vertices[v2.Key] = v2
-	g.Vertices[v2.Key].EdgeWeight = ew
+	g.Vertices[v1.Key].Edges[v2.Key] = ew
 }
 
 func (g *Graph) String() string {
