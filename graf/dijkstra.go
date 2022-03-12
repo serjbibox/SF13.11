@@ -102,65 +102,31 @@ func setCost(v *Vertex) (endFlag bool) {
 	return endFlag
 }
 
-/*
-func GetPath(start *Vertex, dest *Vertex) (route []int) {
-	start.Cost = 0
-	min := math.MaxInt
-	minKey := 0
-	for key, val := range start.Edges {
-		if val < min {
-			min = val
-			minKey = key
-		}
+//Обход графа, начиная со стартовой вершины startVertex
+func ClearCosts(g *Graph) {
+	for _, v := range g.Vertices {
+		v.Cost = math.MaxInt
+		v.Visited = false
+		v.CostRoute = []int{}
 	}
-	fmt.Println("1", start.Vertices[minKey].Key)
-	cnt = 0
-	rec(false, start, dest)
-	//fmt.Print(minKey)
-	return route
-}
-
-var cnt int
-
-func rec(flag bool, start *Vertex, dest *Vertex) {
-	cnt++
-	min := math.MaxInt
-	minKey := 0
-	if flag {
-		return
-	}
-
-	for key, val := range start.Vertices {
-		flag = true
-		if !val.Visited {
-			flag = false
-			tempCost := start.Edges[key] + start.Cost
-			//prevCost := val.Cost
-			if tempCost < val.Cost {
-				start.Vertices[key].Cost = tempCost
+	/*
+		vertexQueue := &queue{}
+		visitedVertices := map[int]bool{}
+		currentVertex := g.Vertices[1]
+		for {
+			visitedVertices[currentVertex.Key] = true
+			for _, v := range currentVertex.Vertices {
+				if !visitedVertices[v.Key] {
+					vertexQueue.enqueue(v)
+				}
 			}
-			//fmt.Println("key", start.Vertices[key].Key, "cost", start.Vertices[key].Cost, "prevCost", prevCost, "cnt", cnt)
-			if start.Vertices[key].Cost < min {
-				min = start.Vertices[key].Cost
-				minKey = key
+			currentVertex.Cost = math.MaxInt
+			currentVertex.Visited = false
+
+			currentVertex = vertexQueue.dequeue()
+			if currentVertex == nil {
+				break
 			}
 		}
-	}
-	start.Visited = true
-	fmt.Println("start.Key", start.Key, "start.Cost", start.Cost)
-	if minKey == 0 {
-		fmt.Println("flag", flag)
-		return
-	}
-
-	//route = append(route)
-	for _, val := range start.Vertices {
-		if start.Vertices[minKey] == nil {
-			fmt.Println("key", start.Key, "cost", start.Cost, "dest", "end")
-		} else {
-			fmt.Println("key", start.Key, "cost", start.Cost, "dest", start.Vertices[minKey].Key)
-		}
-		rec(false, val, dest)
-	}
+	*/
 }
-*/

@@ -35,12 +35,29 @@ func main() {
 	g.AddEdge(8, 9, 21)
 	g.AddEdge(8, 4, 16)
 	g.AddEdge(9, 1, 56)
-	g.AddEdge(10, 5, 100)
 	start := 1
 	dest := 9
+	for i := 0; i < 5; i++ {
+		graf.ClearCosts(g)
+		fmt.Println(graf.GetRoute(g.Vertices[start], g.Vertices[dest], g))
+		fmt.Println("длина пути: ", g.Vertices[dest].Cost)
+	}
+	//g.AddEdge(10, 5, 100)
+	/*graf.ClearCosts(g)
+
 	fmt.Println(graf.GetRoute(g.Vertices[start], g.Vertices[dest], g))
 	fmt.Println("длина пути: ", g.Vertices[dest].Cost)
-	//fmt.Println(graf.GetRoute(g.Vertices[1], g.Vertices[9]))
+	graf.ClearCosts(g)
+	start = 1
+	dest = 10
+	fmt.Println(graf.GetRoute(g.Vertices[start], g.Vertices[dest], g))
+	graf.ClearCosts(g)
+	//g.DeleteVertex(6)
+	start = 1
+	dest = 9
+	fmt.Println(graf.GetRoute(g.Vertices[start], g.Vertices[dest], g))
+	fmt.Println("длина пути: ", g.Vertices[dest].Cost)
+	graf.ClearCosts(g)*/
 	//graf.GetCostsFromKey(g.Vertices[1])
 	/*do := 0
 	fmt.Print("Выберите:\n1 - двоичное дерево;\n2 - неориентированный граф, поиск в ширину;\n")

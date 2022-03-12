@@ -47,6 +47,9 @@ func (g *Graph) AddVertex(key int) {
 	v := NewVertex(key)
 	g.Vertices[key] = v
 }
+func (g *Graph) DeleteVertex(key int) {
+	g.Vertices[key] = nil
+}
 
 func (g *Graph) AddEdge(k1, k2 int, ew int) {
 	v1 := g.Vertices[k1]
