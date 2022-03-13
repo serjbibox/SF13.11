@@ -7,7 +7,14 @@ import (
 )
 
 func GetRoute(start *Vertex, dest *Vertex, g *Graph) (route []int) {
-
+	if start == nil {
+		fmt.Println("стартовой вершины не существует")
+		return
+	}
+	if dest == nil {
+		fmt.Println("целевой вершины не существует")
+		return
+	}
 	start.Cost = 0
 	vertexQueue := &queue{}
 	visitedVertices := map[int]bool{}
@@ -21,16 +28,13 @@ func GetRoute(start *Vertex, dest *Vertex, g *Graph) (route []int) {
 			costArray = append(costArray, v)
 		}
 		sort.Ints(costArray)
-		for _, v := range costArray {
-			if !visitedVertices[costMap[v]] && !current.Vertices[costMap[v]].Visited {
-				vertexQueue.enqueue(current.Vertices[costMap[v]])
+		for i := 0; i < len(costArray); i++ {
+			if !visitedVertices[costMap[costArray[i]]] && !current.Vertices[costMap[costArray[i]]].Visited {
+				vertexQueue.enqueue(current.Vertices[costMap[costArray[i]]])
 			}
 		}
-		//fmt.Println("visited", current.Key)
-
 		setCost(current)
 		current = vertexQueue.dequeue()
-
 		if current == nil {
 			break
 		}
@@ -102,31 +106,12 @@ func setCost(v *Vertex) (endFlag bool) {
 	return endFlag
 }
 
-//Обход графа, начиная со стартовой вершины startVertex
 func ClearCosts(g *Graph) {
 	for _, v := range g.Vertices {
-		v.Cost = math.MaxInt
-		v.Visited = false
-		v.CostRoute = []int{}
-	}
-	/*
-		vertexQueue := &queue{}
-		visitedVertices := map[int]bool{}
-		currentVertex := g.Vertices[1]
-		for {
-			visitedVertices[currentVertex.Key] = true
-			for _, v := range currentVertex.Vertices {
-				if !visitedVertices[v.Key] {
-					vertexQueue.enqueue(v)
-				}
-			}
-			currentVertex.Cost = math.MaxInt
-			currentVertex.Visited = false
-
-			currentVertex = vertexQueue.dequeue()
-			if currentVertex == nil {
-				break
-			}
+		if v != nil {
+			v.Cost = math.MaxInt
+			v.Visited = false
+			v.CostRoute = []int{}
 		}
-	*/
+	}
 }

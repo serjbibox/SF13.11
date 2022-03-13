@@ -14,8 +14,24 @@ func init() {
 }
 
 func main() {
+	do := 0
+	fmt.Print("Выберите:\n1 - двоичное дерево;\n2 - неориентированный граф, поиск в ширину;\n")
+	fmt.Print("3 - ориентированный граф, определение кратчайшего пути между любой парой вершин.\n")
+	fmt.Scanln(&do)
+	switch do {
+	case 1:
+		printBst()
+	case 2:
+		printBFS()
+	case 3:
+		printDijkstra()
+	}
+
+}
+
+func printDijkstra() {
 	g := graf.NewDirectedGraph()
-	for i := 1; i < 11; i++ {
+	for i := 1; i < 10; i++ {
 		g.AddVertex(i)
 	}
 	g.AddEdge(1, 2, 8)
@@ -28,7 +44,7 @@ func main() {
 	g.AddEdge(4, 9, 9)
 	g.AddEdge(4, 5, 12)
 	g.AddEdge(5, 8, 14)
-	g.AddEdge(6, 5, 15)
+	g.AddEdge(6, 5, 16)
 	g.AddEdge(6, 7, 15)
 	g.AddEdge(7, 9, 5)
 	g.AddEdge(8, 7, 8)
@@ -37,38 +53,24 @@ func main() {
 	g.AddEdge(9, 1, 56)
 	start := 1
 	dest := 9
-	for i := 0; i < 5; i++ {
-		graf.ClearCosts(g)
-		fmt.Println(graf.GetRoute(g.Vertices[start], g.Vertices[dest], g))
-		fmt.Println("длина пути: ", g.Vertices[dest].Cost)
-	}
-	//g.AddEdge(10, 5, 100)
-	/*graf.ClearCosts(g)
-
+	fmt.Printf("просчитаем путь от вершины %d до вершины %d\n", start, dest)
+	fmt.Println(graf.GetRoute(g.Vertices[start], g.Vertices[dest], g))
+	fmt.Println("длина пути: ", g.Vertices[dest].Cost)
+	fmt.Printf("Добавим новую вершину с ключом %d и весом ребра %d\n", 10, 100)
+	g.AddVertex(10)
+	g.AddEdge(10, 5, 100)
+	graf.ClearCosts(g)
+	start = 10
+	dest = 2
+	fmt.Printf("просчитаем путь от вершины %d до вершины %d\n", start, dest)
 	fmt.Println(graf.GetRoute(g.Vertices[start], g.Vertices[dest], g))
 	fmt.Println("длина пути: ", g.Vertices[dest].Cost)
 	graf.ClearCosts(g)
 	start = 1
 	dest = 10
+	fmt.Printf("просчитаем путь от вершины %d до вершины %d\n", start, dest)
 	fmt.Println(graf.GetRoute(g.Vertices[start], g.Vertices[dest], g))
 	graf.ClearCosts(g)
-	//g.DeleteVertex(6)
-	start = 1
-	dest = 9
-	fmt.Println(graf.GetRoute(g.Vertices[start], g.Vertices[dest], g))
-	fmt.Println("длина пути: ", g.Vertices[dest].Cost)
-	graf.ClearCosts(g)*/
-	//graf.GetCostsFromKey(g.Vertices[1])
-	/*do := 0
-	fmt.Print("Выберите:\n1 - двоичное дерево;\n2 - неориентированный граф, поиск в ширину;\n")
-	fmt.Scanln(&do)
-	switch do {
-	case 1:
-		printBst()
-	case 2:
-		printBFS()
-	}
-	*/
 }
 
 func printBFS() {
@@ -92,21 +94,6 @@ func printBFS() {
 	g.AddEdge(8, 7, 8)
 	g.AddEdge(8, 9, 21)
 	g.AddEdge(8, 4, 16)
-	//g.AddEdge(9, 1, 56)
-	/*g := graf.NewUndirectedGraph()
-	for i := 0; i < 10; i++ {
-		g.AddVertex(i)
-	}
-	g.AddEdge(1, 6, 1)
-	g.AddEdge(2, 3, 1)
-	g.AddEdge(4, 8, 1)
-	g.AddEdge(3, 4, 1)
-	g.AddEdge(0, 8, 1)
-	g.AddEdge(8, 5, 1)
-	g.AddEdge(5, 3, 1)
-	g.AddEdge(3, 1, 1)
-	*/
-	//fmt.Println(g)
 	route := []int{}
 	rf := func(i int) {
 		route = append(route, i)
@@ -129,6 +116,8 @@ func printBFS() {
 			fmt.Printf("Ключ %d не найден\n", s)
 		}
 	}
+	fmt.Println("Массив смежных вершин:")
+	fmt.Println(g)
 }
 
 func printBst() {
